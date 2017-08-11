@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <title>预览github项目</title>
+  <style>
+    body{
+      text-align: center
+    }
+    #outmsg {
+      display: none
+    }
+    form {
+      padding: 20px 0;
+      width: 70%;
+      margin: 0 auto;
+    }
+    .input-group {
+      padding-bottom: 20px
+    }
+    .wrap-table{
+      display: table;
+      height: 100px;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .wrap {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .outmsg {
+      height: 80px
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap-table">
+    <div class="wrap">
+      <h1>预览github项目</h1>
+
+      <form action="">
+        <div class="outmsg">
+          <p class="alert alert-info" id='outmsg'></p>
+        </div>
+        <div class="preview">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon3">http://htmlpreview.github.io/?</span>
+            <input type="text" class="form-control" id="preview" aria-describedby="basic-addon3">
+          </div>
+          <button type="button" class="btn btn-primary btn-lg" onclick='previewGithub()'>确定</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+
+    function previewGithub(){
+      var obtn = document.getElementById('preview');
+      var msg = document.getElementById('outmsg');
+      var base_url = 'http://htmlpreview.github.io/?'
+      if(!obtn.value) {
+        msg.style.display = "block"
+        msg.innerHTML='没有输入';
+        return
+      }
+
+      if(obtn.value.match(/github\.com/)){
+        msg.style.display = "block"
+        msg.innerHTML='跳转中...';
+        setTimeout(function(){
+          location.href = base_url + obtn.value
+        },500)
+      }else{
+        msg.style.display = "block"
+        msg.innerHTML='请输入github项目地址';
+      }
+
+    }
+
+  </script>
+</body>
+</html>
